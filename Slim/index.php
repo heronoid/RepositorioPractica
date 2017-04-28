@@ -48,6 +48,13 @@ $app->post('/usuario1/:var',function ($var) use ($app) {
     echo json_encode($usuario);
     
 });
+$app->post('/quieroverelclimadevalparaiso',function () use ($app) {
+    
+    $data = file_get_contents("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Valparaiso%2C%20CL%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys");
+	$usuario = json_decode($data, true);
+    echo json_encode($usuario);
+    
+});
  //prueba para llamar al metodo desde el body (no me funciono xd)
 /*$app->post('/usuario2', function () use ($app) {
     
